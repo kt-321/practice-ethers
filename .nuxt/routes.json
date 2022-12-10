@@ -1,7 +1,9 @@
 [
   {
-    "name": "",
-    "path": "",
-    "component": "/Users/moriwakikeita/mypj/practice-ethers/node_modules/@nuxt/vue-app/template/pages/index.vue"
+    "name": "index",
+    "path": "/",
+    "component": "/Users/moriwakikeita/mypj/practice-ethers/app/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_00a47228"
   }
 ]

@@ -1,4 +1,6 @@
 export default {
+  mode: 'spa',
+  srcDir: 'app/',
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
