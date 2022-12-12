@@ -1,8 +1,7 @@
 <template>
     <div class="page-index" title="PracticeEthers">
         <p style="font-size: 12px">wallet</p>
-        <p>{{ this.connectedMetamask() }}</p>
-        <button @click="connectedMetamask">wallet</button>
+        <button @click="handleMetamaskConnection">ウォレット接続</button>
     </div>
 </template>
 
@@ -10,18 +9,29 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { ethers } from 'ethers'
 
-// @Component({})
 export default class PageIndex extends Vue {
-    connectedMetamask () {
-        console.log("window.ethereum", window.ethereum)
-        const provider = window.ethereum != null
-        ? new ethers.providers.Web3Provider(window.ethereum, 'any')
-        : ethers.getDefaultProvider();
-        console.log("provider:", provider)
-    }
+    async handleMetamaskConnection() {
+        if (!window.ethereum) {
+            console.log('!window.ethereum')
+            window.open('https://metamask.app.link/dapp/', '_blank', 'noopener noreferrer');
+        } else {
+            console.log('window.ethereum')
 
-    mounted () {
-        this.connectedMetamask()
+            const provider = new ethers.providers.Web3Provider(window.ethereum)
+            const account = await provider.send('eth_requestAccounts', [])
+            console.log("account:", account)
+
+            const signer = await provider.getSigner()
+            console.log("signer:", signer)
+
+            const address = await signer.getAddress()
+            console.log("address:", address)
+            // const balance = await signer.getBalance()
+            // console.log("balance:", balance)
+
+            // TODO message
+            // const message = 'message'
+        }
     }
 }
 </script>
